@@ -1,0 +1,29 @@
+setcps (150/4/60)
+
+d1 -- Drum
+  $ superimpose (((1/16) ~>) . (# pan 0.8) . (*| gain 0.8))
+  $ s "ybd <ysd!3 [yclk ysd]> [<- yhh> <ybd [ysd <yclk [<ysd yhh*2> yhh*2]> ] > ] ysd"
+  # n "0"
+  # gain "1 0.9 <1 0.8> 0.9"
+  # room 0.1
+
+d2 -- Alien Sounds
+  $ s "[<-!6 alienic1:1> <alienic1 alienic1:2>]*4"
+  # gain 0.56
+  # room 0.5 # size 0.87
+
+d3 -- Hihat
+  $ s "[- yhh]*4"
+  # gain 0.9
+
+d4 -- BASS
+  $ sound "- <jungbass!3 jungbass:6>"
+  # clip "<0.4 1>/4"
+  # gain "<1 0.8>/4"
+
+d1
+  $ sound "dualBass"
+
+
+:script /Users/eayavas/.cabal/store/ghc-9.6.7/tdl-1.10.1-5d377d17/share/BootTidal.hs
+

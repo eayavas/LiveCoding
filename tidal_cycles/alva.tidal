@@ -1,0 +1,11 @@
+setcps (145/60/4)
+
+d1 $ note (scale "phrygian" "[0 <0 4> <1 2 3 4> 0]*2" - 24)
+  # s "eay_sin"
+  # cutoff (range 200 3000 $ slow 4 isaw)
+  # resonance 0.3
+  # squiz 0.7
+  # decay 0.2
+  # gain 0.65
+
+d2 $ sound "eay_bd*4

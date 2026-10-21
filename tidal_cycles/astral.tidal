@@ -1,0 +1,23 @@
+-- NEEDS TO RUN WITH scGoaSynths.scd FILE
+
+let cutoff = pF "cutoff"
+    res = pF "res"
+    envmod = pF "envmod"
+    mRatio = pF "mRatio"
+    index = pF "index"
+
+d1 $ timeLoop 1 $ s "goabass*16"
+   # note (scale "phrygian" (irand 10 |- 1))
+   # gain 0.7
+   # amp "[0.6 0.8 1 1.9]*4"
+   # sustain 0.3
+   # octave 2
+   # envmod 3
+   # res 1
+
+d2 $ sound "goakick*4"
+
+d3 $ s "[linnhats:4 ho:1]*4"
+  # gain 0.8
+
+hush

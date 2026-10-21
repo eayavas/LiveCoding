@@ -1,0 +1,37 @@
+let splitFreq = pF "splitFreq"
+    crushRate = pF "crushRate"
+    bits = pF "bits"
+    drive = pF "drive"
+    mRatio = pF "mRatio"
+    mIndex = pF "mIndex"
+    fold = pF "fold"
+
+do
+  d1 $ s "dualBass(<5 3>,8)"
+    # n "f3!3 <gs3!3 cs4>"
+    # crushRate (range 1000 8000 $ sine)
+    # bits "2 3 4 2"
+    # drive 6
+    # splitFreq "250 600 100 <- 400>"
+    # legato 2
+    # room 0.1
+  resetCycles
+
+d2 $ s "[bd:1 ysd [- bd:1] ysd]"
+  # distort 0.3
+  # room 0.3
+  # gain 1.2
+
+d3 $ repeatCycles 2 $ note (scale "phyrigian" (segment 16 $ irand 8)) |+ note "f3" # s "indLead"
+  # gain 0.5
+  # room 0.7
+
+d4 $ note (scale "phyrigian" "0 1 3 2 1 3 2 4") |+ note "f5" # sound "kurt"
+  # room 0.3
+  # gain 0.8
+
+d5 $ note (scale "phyrigian" "0 1 3 2 1 3 2 4") |+ note "f5" # sound "juno"
+  # room 0.3
+  # gain 0.93
+
+hush

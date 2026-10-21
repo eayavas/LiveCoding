@@ -1,0 +1,81 @@
+
+let kit name pat = s (fmap (name ++) pat)
+
+d1 $ ply "1 2 3 4 5 6 7 8" $ up "0 3 7 12 15"
+  # s "superpiano"
+  # sustain 0.3
+  # room 0.3
+  # distort 0.6
+
+hush
+
+do
+d1
+  $ ply "2 4 6 8" 
+  $ note (scale "harmonicMinor" ("<-4 -3 -1 0>" |+ "2 4 7 8 0"))
+  # s "superpiano"
+  # sustain 0.2
+  # room 0.5 # size 0.95
+  # lpf 1500
+  # distort 0.23
+  # crush 3
+  # amp 0.03
+
+hush
+
+d5 $ slice 32 "[<0*1 0*2> 3 2 4] [4 .. 7]" $ sound "break"
+  # legato 1
+  # hpf 500
+  # room 0.1
+  # amp 0.2
+
+do
+d2 $ timeLoop 8
+  $ every 4 (within (0.9, 1) (ply 8))
+  $ sometimesBy 0.1 (ply 4)
+  $ kit "wild" "bs*4"
+  # legato 1
+  # crush (slow 2 $ range 4 7 $ sine)
+  # distort 0.2
+resetCycles
+
+d3 $ kit "tight-impact" "sd(2,4,1)" # room "[0.1 0.3]" # sz 0.9 # dry 0.5
+  
+
+d4 $ kit "eaykit" "hh*16" # gain (fast 6 $ range 0.75 1 $ sine) 
+
+
+d2 $ kit "eaykit" "bd:1(4,4), bd(2,6,2)"
+  # room 0.4
+
+do
+  d2 $ kit "eaykit" "bd(3. 8), sd(3,8,2), cp(2,8,2)"
+    # distort 0.1
+    # crush "16 4 16 6"
+    # amp 1
+
+do
+  d2 $ kit "eaykit" "bd(4,4), sd(3,8,2), cp(2,8,1)"
+    # distort 0.1
+    # crush "16 4 16 6"
+    # amp 1
+  d3 $ kit "eaykit" "hh*16" # gain (fast 6 $ range 0.75 1 $ sine) 
+
+do
+d4 $ timeLoop 32
+  $ sometimesBy 0.3 (ply 16) 
+  $ sometimesBy 0.1 (ply 16)
+  $ slow 4
+  $ note (scale "harmonicMinor" "-3 -4 -6 [-5@3 <-2 1*4>]")
+  # s "supersaw"
+  # semitone 7
+  # amp 0.2
+  # legato 1
+  # resonance 0.6
+  # rate 0.2
+  # crush 8
+resetCycles
+
+d1 silence
+
+d5 silence

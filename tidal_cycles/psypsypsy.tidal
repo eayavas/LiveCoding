@@ -1,0 +1,52 @@
+setcps(152/4/60)
+
+d1 -- kick
+  $ s "psybd*4"
+
+d2 -- bass
+  $ n "[- 0 0 0]*4" # s "psybass"
+  # amp "[0 0.6 1 0.85]*4"
+
+hush
+
+let cutoff = pF "cutoff"
+    res = pF "res"
+    envmod = pF "envmod"
+    atk = pF "atk"
+    dec = pF "dec"
+    drive = pF "drive"
+
+let detune = pF "detune"
+    vrate = pF "vrate"
+    vdepth = pF "vdepth"
+
+
+d3 -- hihat
+  $ s "[hh hh hh hh]*4" # n "8"
+  # amp ("[0.8 0.7 1 0.85]*4" |- 0.5)
+
+d4 -- openhat
+  $ s "[- hh]*4" # n "13"
+
+d6 -- snare
+  $ "[- sd]*2"
+  # amp 0.1
+  # n "1"
+  
+resetCycles
+
+d5 $ n (scale "harmonicMinor" ( fast 2 $ "0 1 <- 2> <3 - 7 -> - <2 4> <0 -> <1 3 5 8>") |+ "fs4") 
+  # s "goalead"
+  # distort 0.15
+  # cutoff (range 700 5000 $ slow 8 sine)
+  # res 0.07
+  # envmod "200"
+  # dec 0.1
+  # sustain 0.2
+  # detune 0.02
+  # vrate 8
+  # vdepth 0.02
+  # delay 0.8
+  # delayt (3/8)
+  # delayfb 0.5
+  # amp 0.17
